@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Pizza</title>
+</head>
+<body>
+    <h1>Você selecionou: Pizza Calabresa</h1>
+
+    <form name="calabresa" action="#" autocomplete="off" method="get" target="_self">
+    <h2>Quais opcionais deseja?</h2>
+        <input type="checkbox" name="opcional[]" value="queijo"><label> + queijo</label> <br>
+        <input type="checkbox" name="opcional[]" value="calabresa"><label > + calabresa</label> <br>
+        <input type="checkbox" name="opcional[]" value="cebola"><label> + cebola</label> <br>
+        <input type="checkbox" disabled name="opcional[]" value="azeitona"><label> + azeitona</label>
+        <!--Sempre que for enviar uma lista utilizar [] e usar method="post" para o back-end entender q se trata de uma lista-->
+
+    <h2>Borda Recheda?</h2>
+        <input type="radio" name="borda" value="sim"><label> Sim</label> <br>
+        <input type="radio" name="borda" value="nao"><label> Não</label>
+
+    <h2>Bebida</h2>
+        <input type="radio" name="bebida" value="suco"><label>Suco</label><br>
+        <input type="radio" name="bebida" value="refrigerante"><label>Refrigerante</label><br>
+        <input type="radio" name="bebida" value="refrigerante-zero"><label>Refrigerante Zero</label><br>
+        <input type="radio" name="bebida" value="agua"><label>Água</label><br>
+        <input type="radio" name="bebida" value="nenhuma"><label>Nenhuma</label>
+        <br>
+        <br>
+    <button type="submit">Enviar Pedido</button>
+    </form>
+    
+</body>
+</html>
