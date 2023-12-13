@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo</title>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas');
+        const ctx = canvas.getContext('2d');
+
+        const RADIUS = 40;
+        const VELOCITY = 0.05;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        ctx.fillStyle = 'rgba(10, 10, 10, 1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const mouse = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+        };
+
+        const onMouseMove = (e) => {
+            mouse.x = e?.clientX || e.touches[0].clientX;
+            mouse.y = e?.clientY || e.touches[0].clientY;
+        }
+
+        const clearCanvas = () => {
+            ctx.fillStyle = 'rgba(1, 1, 1, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+
+
+        const distance = (x1, y1, x2, y2) => Math.abs(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+
+        class circle {
+            constructor() {
+                this.radius = RADIUS;
+                this.x = 0;
+                this.y = 0;
+                this.hue = 90;
+                this.lightness = 50;
+                this.lineWidth = 2;
+                this.lastMousePos = { x: this.x, y: this.y };
+    }
+
+            update() {
+
+                if (distance(mouse.x, mouse.y, this.lastMousePos.x, this.lastMousePos.y) < 0.1) {
+                    this.lightness = this.lightness > 0 ? this.lightness - 1 : 0;
+                    this.draw();
+                    return;
+                } else if (this.lightness !== 50) {
+                    this.lightness = this.lightness < 100 ? this.lightness + 1 : 100;
+                }
+
+                this.lastMousePos.x += (mouse.x - this.lastMousePos.x) * VELOCITY;
+                this.lastMousePos.y += (mouse.y - this.lastMousePos.y) * VELOCITY;
+
+                this.x = this.lastMousePos.x;
+                this.y = this.lastMousePos.y;
+
+                this.hue = ((this.lastMousePos.x + this.lastMousePos.y) / 2) % 360;
+                this.draw();
+            }
+
+            draw() {
+                ctx.lineWidth = this.lineWidth;
+                ctx.strokeStyle = `hsl(${this.hue}, 100%, ${this.lightness}%)`;
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.stroke();
+            }
+        }
+
+
+             const cursor = new circle();
+
+            const tick = () => {
+                clearCanvas();
+                cursor.update();
+                window.requestAnimationFrame(tick);
+            }
+
+            window.requestAnimationFrame(tick);
+
+            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('touchmove', onMouseMove);
+    </script>
+    
+</body>
+</html>

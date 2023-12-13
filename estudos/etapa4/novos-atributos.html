@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novos Atributos</title>
+    <style>
+        form{
+            width: 700px;
+            position: absolute;
+            left: 25%;
+            top: 20%;
+        }
+        form > fieldset{
+            margin-bottom: 20px;
+        }
+        form > fieldset > input{
+            margin: 0px 25px 0px 5px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="get" id="form" onsubmit="">
+        <h1>Novos Atributos</h1>
+        
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+            <label for="name">Name: </label><input type="text" name="name" id="name" autofocus required>
+            <label for="email">E-mail: </label><input type="email" placeholder="Ex: meuemail@gmail.com" name="email" id="email" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Endereço</legend>
+            <label for="endereco">Enderço: </label><input type="text" name="endereco" id="endereco" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Observações</legend>
+            <textarea name="observacoes" cols="30" rows="10" minlength="10" maxlength="150"></textarea>
+        </fieldset>
+        <button type="submit">Enviar</button><button type="reset">Limpar</button>
+
+    </form>
+    
+    
+</body>
+</html>
